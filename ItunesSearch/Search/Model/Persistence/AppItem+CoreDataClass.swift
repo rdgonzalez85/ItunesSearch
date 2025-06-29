@@ -14,7 +14,7 @@ public class AppItem: NSManagedObject {
         self.averageUserRating = appResult.averageUserRating ?? 0.0
         self.userRatingCount = Int32(appResult.userRatingCount ?? 0)
         self.primaryGenreName = appResult.primaryGenreName
-        self.formattedPrice = appResult.formattedPrice
+        self.formattedPrice = appResult.formattedPrice ?? ""
         self.trackDescription = appResult.description
         self.screenshotUrls = appResult.screenshotUrls
         self.trackContentRating = appResult.trackContentRating
@@ -35,7 +35,7 @@ public class AppItem: NSManagedObject {
             primaryGenreName: primaryGenreName ?? "",
             formattedPrice: formattedPrice,
             description: trackDescription ?? "",
-            screenshotUrls: screenshotUrls,
+            screenshotUrls: screenshotUrls ?? [],
             trackContentRating: trackContentRating ?? "",
             minimumOsVersion: minimumOsVersion ?? ""
         )

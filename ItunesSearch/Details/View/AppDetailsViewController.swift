@@ -5,6 +5,7 @@ class AppDetailsViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
+    private let headerContentStackView: UIStackView = UIStackView()
     private let appIconImageView = UIImageView()
     private let appNameLabel = UILabel()
     private let developerLabel = UILabel()
@@ -53,6 +54,7 @@ class AppDetailsViewController: UIViewController {
         setupUI()
         setupConstraints()
         configureView()
+        setupAccessibility()
     }
 
     deinit {
@@ -69,6 +71,18 @@ class AppDetailsViewController: UIViewController {
         scrollView.alwaysBounceVertical = true
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        headerContentStackView.translatesAutoresizingMaskIntoConstraints = false
+        headerContentStackView.axis = .horizontal
+        headerContentStackView.alignment = .center
+        headerContentStackView.spacing = self.layout.padding
+
+        let appDetailsTextStack = UIStackView(arrangedSubviews: [appNameLabel, developerLabel, categoryLabel])
+        appDetailsTextStack.axis = .vertical
+        appDetailsTextStack.alignment = .leading
+        appDetailsTextStack.spacing = self.layout.smallSpacing
+        appDetailsTextStack.translatesAutoresizingMaskIntoConstraints = false
+
 
         appIconImageView.translatesAutoresizingMaskIntoConstraints = false
         appIconImageView.layer.cornerRadius = self.layout.appIconCornerRadius
@@ -104,6 +118,12 @@ class AppDetailsViewController: UIViewController {
         priceButton.setTitleColor(self.style.whiteColor, for: .normal)
         priceButton.titleLabel?.font = self.style.priceButtonFont
         priceButton.layer.cornerRadius = self.layout.priceButtonCornerRadius
+        priceButton.setContentHuggingPriority(.required, for: .horizontal)
+        priceButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+
+        headerContentStackView.addArrangedSubview(appIconImageView)
+        headerContentStackView.addArrangedSubview(appDetailsTextStack)
+        headerContentStackView.addArrangedSubview(priceButton)
 
         screenshotsLabel.translatesAutoresizingMaskIntoConstraints = false
         screenshotsLabel.text = self.style.screenshotsLabelText
@@ -144,8 +164,7 @@ class AppDetailsViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        [appIconImageView, appNameLabel, developerLabel, categoryLabel,
-         ratingStackView, ratingLabel, priceButton, screenshotsLabel,
+        [headerContentStackView, ratingStackView, ratingLabel, screenshotsLabel,
          screenshotsCollectionView, descriptionLabel, descriptionTextView,
          informationLabel, informationStackView].forEach {
             contentView.addSubview($0)
@@ -165,34 +184,22 @@ class AppDetailsViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            appIconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: self.layout.headerTopPadding),
-            appIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: self.layout.padding),
+            headerContentStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: self.layout.headerTopPadding),
+            headerContentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: self.layout.padding),
+            headerContentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -self.layout.padding),
+
             appIconImageView.widthAnchor.constraint(equalToConstant: self.layout.appIconSize),
             appIconImageView.heightAnchor.constraint(equalToConstant: self.layout.appIconSize),
 
-            appNameLabel.topAnchor.constraint(equalTo: appIconImageView.topAnchor),
-            appNameLabel.leadingAnchor.constraint(equalTo: appIconImageView.trailingAnchor, constant: self.layout.padding),
+            priceButton.heightAnchor.constraint(equalToConstant: self.layout.priceButtonHeight),
+            priceButton.widthAnchor.constraint(greaterThanOrEqualToConstant: self.layout.priceButtonMinimumWidth),
 
-            developerLabel.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: self.layout.smallSpacing),
-            developerLabel.leadingAnchor.constraint(equalTo: appNameLabel.leadingAnchor),
-            developerLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceButton.leadingAnchor, constant: -self.layout.priceButtonHorizontalSpacing),
-
-            categoryLabel.topAnchor.constraint(equalTo: developerLabel.bottomAnchor, constant: self.layout.smallSpacing),
-            categoryLabel.leadingAnchor.constraint(equalTo: appNameLabel.leadingAnchor),
-            categoryLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceButton.leadingAnchor, constant: -self.layout.priceButtonHorizontalSpacing),
-
-            ratingStackView.topAnchor.constraint(equalTo: appIconImageView.bottomAnchor, constant: self.layout.mediumSpacing),
+            ratingStackView.topAnchor.constraint(equalTo: headerContentStackView.bottomAnchor, constant: self.layout.mediumSpacing),
             ratingStackView.leadingAnchor.constraint(equalTo: appIconImageView.leadingAnchor),
             ratingStackView.heightAnchor.constraint(equalToConstant: self.layout.ratingStackViewHeight),
 
             ratingLabel.leadingAnchor.constraint(equalTo: ratingStackView.trailingAnchor, constant: self.layout.ratingLabelLeadingSpacing),
             ratingLabel.centerYAnchor.constraint(equalTo: ratingStackView.centerYAnchor),
-
-            priceButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -self.layout.padding),
-            priceButton.bottomAnchor.constraint(equalTo: appIconImageView.bottomAnchor),
-            priceButton.heightAnchor.constraint(equalToConstant: self.layout.priceButtonHeight),
-            priceButton.widthAnchor.constraint(greaterThanOrEqualToConstant: self.layout.priceButtonMinimumWidth),
-            appNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceButton.leadingAnchor, constant: -self.layout.priceButtonHorizontalSpacing),
 
             screenshotsLabel.topAnchor.constraint(equalTo: ratingStackView.bottomAnchor, constant: self.layout.sectionSpacing),
             screenshotsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: self.layout.padding),
@@ -236,7 +243,6 @@ class AppDetailsViewController: UIViewController {
     }
 
     private func setupStarRating() {
-        // Clear existing star views
         ratingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         let rating = viewModel.rating
@@ -263,6 +269,8 @@ class AppDetailsViewController: UIViewController {
     }
 
     private func setupInformationSection() {
+        informationStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
         let infoItems = viewModel.informationItems
 
         for item in infoItems {
@@ -317,6 +325,66 @@ class AppDetailsViewController: UIViewController {
             }
         }
     }
+
+    private func setupAccessibility() {
+        headerContentStackView.isAccessibilityElement = true
+        headerContentStackView.accessibilityLabel = "\(viewModel.appName) by \(viewModel.developerName). Category: \(viewModel.category). \(viewModel.price) to download."
+        headerContentStackView.accessibilityTraits = .staticText
+        
+        appIconImageView.isAccessibilityElement = false
+        appNameLabel.isAccessibilityElement = false
+        developerLabel.isAccessibilityElement = false
+        categoryLabel.isAccessibilityElement = false
+        priceButton.isAccessibilityElement = true
+        priceButton.accessibilityLabel = "\(viewModel.price) app. Tap to get."
+        
+        ratingStackView.isAccessibilityElement = true
+        ratingStackView.accessibilityLabel = viewModel.ratingText
+        ratingStackView.accessibilityTraits = .staticText
+        ratingLabel.isAccessibilityElement = false
+        ratingStackView.arrangedSubviews.forEach { $0.isAccessibilityElement = false }
+
+
+        screenshotsLabel.isAccessibilityElement = true
+        screenshotsLabel.accessibilityTraits = .header
+
+        screenshotsCollectionView.isAccessibilityElement = true
+        screenshotsCollectionView.accessibilityLabel = "App Screenshots"
+        screenshotsCollectionView.accessibilityTraits = .adjustable
+
+        descriptionLabel.isAccessibilityElement = true
+        descriptionLabel.accessibilityTraits = .header
+
+        descriptionTextView.isAccessibilityElement = true
+        descriptionTextView.accessibilityLabel = viewModel.description
+        descriptionTextView.accessibilityTraits = .staticText
+
+        informationLabel.isAccessibilityElement = true
+        informationLabel.accessibilityTraits = .header
+
+        informationStackView.isAccessibilityElement = false
+        for (index, subview) in informationStackView.arrangedSubviews.enumerated() {
+            let container = subview
+            if  index < viewModel.informationItems.count {
+                let item = viewModel.informationItems[index]
+                container.isAccessibilityElement = true
+                container.accessibilityLabel = "\(item.title), \(item.value)"
+                container.accessibilityTraits = .staticText
+                container.subviews.forEach { $0.isAccessibilityElement = false }
+            }
+        }
+        
+        self.view.accessibilityElements = [
+            headerContentStackView,
+            priceButton,
+            ratingStackView,
+            screenshotsLabel,
+            screenshotsCollectionView,
+            descriptionLabel,
+            descriptionTextView,
+            informationLabel
+        ]
+    }
     
     struct Layout {
         let padding: CGFloat = 16.0
@@ -343,6 +411,7 @@ class AppDetailsViewController: UIViewController {
         let screenshotMinimumLineSpacing: CGFloat = 12.0
         let screenshotSectionInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         let screenshotCollectionViewHeight: CGFloat = 350.0
+        let screenshotCornerRadius: CGFloat = 12.0
 
         let informationStackViewSpacing: CGFloat = 12.0
         let informationValueTopSpacing: CGFloat = 4.0
@@ -401,12 +470,15 @@ extension AppDetailsViewController: UICollectionViewDataSource, UICollectionView
 class ScreenshotCollectionViewCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private var imageLoadTask: Task<Void, Never>?
+    private let imageLoader: ImageLoaderProtocol = ImageLoader()
+    
     private let style = Style()
     private let layout = Layout()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        setupAccessibility()
     }
 
     required init?(coder: NSCoder) {
@@ -440,13 +512,9 @@ class ScreenshotCollectionViewCell: UICollectionViewCell {
         imageLoadTask?.cancel()
 
         imageLoadTask = Task {
-            guard let url = URL(string: urlString) else { return }
-
             do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-
-                guard !Task.isCancelled else { return }
-                guard let image = UIImage(data: data) else { return }
+                guard let image = try await self.imageLoader.loadImage(urlString: urlString),
+                      !Task.isCancelled else { return }
 
                 await MainActor.run {
                     self.imageView.image = image
@@ -459,6 +527,13 @@ class ScreenshotCollectionViewCell: UICollectionViewCell {
 
     deinit {
         imageLoadTask?.cancel()
+    }
+
+    private func setupAccessibility() {
+        self.isAccessibilityElement = true
+        self.accessibilityLabel = "App Screenshot"
+        self.accessibilityTraits = .image
+        imageView.isAccessibilityElement = false
     }
     
     struct Layout {

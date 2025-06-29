@@ -22,7 +22,7 @@ extension AppItem {
     @NSManaged public var trackId: Int64
     @NSManaged public var userRatingCount: Int32
     @NSManaged public var trackDescription: String?
-    @NSManaged public var screenshotUrls: [String]
+    @NSManaged public var screenshotUrls: [String]?
     @NSManaged public var trackContentRating: String?
     @NSManaged public var minimumOsVersion: String?
 

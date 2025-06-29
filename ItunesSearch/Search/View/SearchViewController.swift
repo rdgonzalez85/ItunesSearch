@@ -34,9 +34,7 @@ class SearchViewController: UIViewController {
         setupConstraints()
         setupTableView()
         setupBindings()
-        performInitialSearch()
     }
-
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
@@ -124,15 +122,7 @@ class SearchViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
     private var cancellables = Set<AnyCancellable>()
-    
-    @MainActor
-    private func performInitialSearch() {
-        Task {
-            await viewModel.searchApps(query: "mobile journalism")
-        }
-    }
     
     private func showError(_ message: String) {
         let alert = UIAlertController(
@@ -149,6 +139,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
+        viewModel.clearResults()
         Task {
             await viewModel.searchApps(query: query)
         }
@@ -174,6 +165,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let cellViewModel = viewModel.appViewModel(at: indexPath.row)
         cell.configure(with: cellViewModel)
+        cell.accessibilityTraits = .button
         return cell
     }
     
