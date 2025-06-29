@@ -4,39 +4,50 @@ import XCTest
 final class SearchViewModelTests: XCTestCase {
 
     @MainActor
-    func testGivenServiceThatReturnsApps_WhenSearchViewModelSearchApps_CorrectAppsAreReturned() async {
+    func testGivenServiceThatReturnsApps_WhenSUTSearchApps_CorrectAppsAreReturned() async {
         // Given
         let expectedApps = [AppResult.mock(), AppResult.mock()]
         let service = MockiTunesService()
         service.defaultSuccessResults = expectedApps
         service.defaultError = NetworkError.invalidURL
-        let viewModel = SearchViewModel(iTunesService: service)
+        let sut = self.makeSUT(iTunesService: service)
         
         // When
-        await viewModel.searchApps(query: "query")
+        await sut.searchApps(query: "query")
         
         // Then
-        XCTAssertNotNil(viewModel.apps)
-        XCTAssertEqual(viewModel.apps.count, expectedApps.count)
+        XCTAssertNotNil(sut.apps)
+        XCTAssertEqual(sut.apps.count, expectedApps.count)
         
-        for (index, value) in viewModel.apps.enumerated() {
+        for (index, value) in sut.apps.enumerated() {
             XCTAssertTrue(value.isEqualTo(expectedApps[index]))
         }
     }
     
     @MainActor
-    func testGivenServiceThatReturnsAnError_WhenSearchViewModelSearchApps_ErrorIsReturned() async {
+    func testGivenServiceThatReturnsAnError_WhenSUTSearchApps_ErrorIsReturned() async {
         // Given
         let service = MockiTunesService()
         service.defaultError = NetworkError.invalidURL
-        let viewModel = SearchViewModel(iTunesService: service)
+        let sut = self.makeSUT(iTunesService: service)
         
         // When
-        await viewModel.searchApps(query: "query")
+        await sut.searchApps(query: "query")
         
         // Then
-        XCTAssertNotNil(viewModel.errorMessage)
-        
+        XCTAssertNotNil(sut.errorMessage)
+    }
+    
+    private func makeSUT(
+        iTunesService: iTunesServiceProtocol = MockiTunesService(),
+        coreDataManager: CoreDataManagerProtocol = MockCoreDataManager(),
+        networkReachability: NetworkReachabilityProtocol = MockNetworkReachability()
+    ) -> SearchViewModel {
+        return SearchViewModel(
+            iTunesService: iTunesService,
+            coreDataManager: coreDataManager,
+            networkReachability: networkReachability
+        )
     }
 }
 

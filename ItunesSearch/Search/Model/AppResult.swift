@@ -6,6 +6,7 @@ struct SearchResponse: Codable {
 }
 
 struct AppResult: Codable, Equatable {
+    let trackId: Int
     let trackName: String
     let artistName: String
     let artworkUrl100: String
@@ -13,4 +14,5 @@ struct AppResult: Codable, Equatable {
     let userRatingCount: Int?
     let primaryGenreName: String
     let formattedPrice: String?
+    let description: String
 }

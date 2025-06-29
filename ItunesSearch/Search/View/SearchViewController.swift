@@ -20,7 +20,15 @@ class SearchViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        viewModel = SearchViewModel(iTunesService: iTunesService())
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let coreDataManager = CoreDataManager(persistentContainer: appDelegate.persistentContainer)
+        let networkReachability = NetworkReachability()
+                
+        viewModel = SearchViewModel(
+            iTunesService: iTunesService(),
+            coreDataManager: coreDataManager,
+            networkReachability: networkReachability
+        )
     }
     
     private func setupUI() {

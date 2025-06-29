@@ -3,7 +3,7 @@ import XCTest
 
 final class iTunesServiceTests: XCTestCase {
 
-    func testGivenSessionWithExpectedApps_WhenItunesServiceSearchApps_ThenCorrectAppsAreReturned() async throws {
+    func testGivenSessionWithExpectedApps_WhenSUTSearchApps_ThenCorrectAppsAreReturned() async throws {
         // Given
         let expectedApps = [AppResult.mock(), AppResult.mock()]
         let searchResponseEncoded = try SearchResponse(resultCount: 1, results: expectedApps).encode()
@@ -14,23 +14,23 @@ final class iTunesServiceTests: XCTestCase {
         
         let session = MockURLSession()
         session.dataHandler = dataHandler
-        let service = iTunesService(session: session)
+        let sut = iTunesService(session: session)
         
         // When
-        let apps = try await service.searchApps(query: "query")
+        let apps = try await sut.searchApps(query: "query")
         
         // Then
         XCTAssertEqual(apps, expectedApps)
     }
 
-    func test_WhenItunesServiceSearchAppsWithEmptyQuery_ThenErrorIsThrown() async throws {
+    func test_WhenSUTSearchAppsWithEmptyQuery_ThenErrorIsThrown() async throws {
         // Given
         let session = MockURLSession()
-        let service = iTunesService(session: session)
+        let sut = iTunesService(session: session)
         
         // When
         do {
-            _ = try await service.searchApps(query: "")
+            _ = try await sut.searchApps(query: "")
             XCTFail("searchApps should throw")
         } catch let error {
             // Then
@@ -38,7 +38,6 @@ final class iTunesServiceTests: XCTestCase {
             XCTAssertEqual(error, NetworkError.invalidURL)
         }
     }
-    
 }
 
 extension SearchResponse {

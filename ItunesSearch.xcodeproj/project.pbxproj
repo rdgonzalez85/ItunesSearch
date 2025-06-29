@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54F11ABE2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ABC2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift */; };
+		54F11ABF2E10AD4500B7B8D5 /* AppItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ABD2E10AD4500B7B8D5 /* AppItem+CoreDataProperties.swift */; };
+		54F11AC12E10ADA500B7B8D5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC02E10ADA500B7B8D5 /* CoreDataManager.swift */; };
+		54F11AC32E10ADB700B7B8D5 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC22E10ADB700B7B8D5 /* NetworkReachability.swift */; };
+		54F11AC72E11795A00B7B8D5 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */; };
+		54F11AC92E1179E100B7B8D5 /* MockNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */; };
+		54F11ACB2E117BA600B7B8D5 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */; };
 		54F6CE4C2E10241D000988C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6CE4B2E10241D000988C0 /* AppDelegate.swift */; };
 		54F6CE4E2E10241D000988C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */; };
 		54F6CE532E10241D000988C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F6CE512E10241D000988C0 /* Main.storyboard */; };
@@ -46,6 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		54F11ABC2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		54F11ABD2E10AD4500B7B8D5 /* AppItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		54F11AC02E10ADA500B7B8D5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		54F11AC22E10ADB700B7B8D5 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
+		54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkReachability.swift; sourceTree = "<group>"; };
+		54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		54F6CE482E10241D000988C0 /* ItunesSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItunesSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F6CE4B2E10241D000988C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +110,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54F11ABB2E10AD3600B7B8D5 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				54F11ABC2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift */,
+				54F11ABD2E10AD4500B7B8D5 /* AppItem+CoreDataProperties.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		54F6CE3F2E10241D000988C0 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				54F6CE7E2E1030D4000988C0 /* Search */,
+				54F11AC02E10ADA500B7B8D5 /* CoreDataManager.swift */,
+				54F11AC22E10ADB700B7B8D5 /* NetworkReachability.swift */,
 				54F6CE4B2E10241D000988C0 /* AppDelegate.swift */,
 				54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */,
 				54F6CE512E10241D000988C0 /* Main.storyboard */,
@@ -138,6 +163,7 @@
 				54F6CE652E102420000988C0 /* iTunesServiceTests.swift */,
 				54F6CE9B2E105888000988C0 /* SearchViewModelTests.swift */,
 				54F6CE9D2E105EB3000988C0 /* AppCellViewModelTests.swift */,
+				54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */,
 			);
 			path = ItunesSearchTests;
 			sourceTree = "<group>";
@@ -173,6 +199,7 @@
 		54F6CE942E104FA4000988C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				54F11ABB2E10AD3600B7B8D5 /* Persistence */,
 				54F6CE8F2E1040CE000988C0 /* iTunesService.swift */,
 				54F6CE912E104111000988C0 /* AppResult.swift */,
 			);
@@ -193,6 +220,8 @@
 			children = (
 				54F6CE972E105333000988C0 /* MockURLSession.swift */,
 				54F6CE992E10584C000988C0 /* MockItunesService.swift */,
+				54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */,
+				54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -332,10 +361,14 @@
 				54F6CE4C2E10241D000988C0 /* AppDelegate.swift in Sources */,
 				54F6CE872E103FBC000988C0 /* SearchViewController.swift in Sources */,
 				54F6CE8C2E104094000988C0 /* SearchViewModel.swift in Sources */,
+				54F11ABF2E10AD4500B7B8D5 /* AppItem+CoreDataProperties.swift in Sources */,
 				54F6CE8A2E104006000988C0 /* AppTableViewCell.swift in Sources */,
+				54F11AC12E10ADA500B7B8D5 /* CoreDataManager.swift in Sources */,
+				54F11AC32E10ADB700B7B8D5 /* NetworkReachability.swift in Sources */,
 				54F6CE4E2E10241D000988C0 /* SceneDelegate.swift in Sources */,
 				54F6CE562E10241D000988C0 /* ItunesSearch.xcdatamodeld in Sources */,
 				54F6CE922E104111000988C0 /* AppResult.swift in Sources */,
+				54F11ABE2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift in Sources */,
 				54F6CE8E2E1040AD000988C0 /* AppCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,8 +379,11 @@
 			files = (
 				54F6CE662E102420000988C0 /* iTunesServiceTests.swift in Sources */,
 				54F6CE9E2E105EB3000988C0 /* AppCellViewModelTests.swift in Sources */,
+				54F11AC92E1179E100B7B8D5 /* MockNetworkReachability.swift in Sources */,
 				54F6CE982E105333000988C0 /* MockURLSession.swift in Sources */,
 				54F6CE9C2E105888000988C0 /* SearchViewModelTests.swift in Sources */,
+				54F11AC72E11795A00B7B8D5 /* MockCoreDataManager.swift in Sources */,
+				54F11ACB2E117BA600B7B8D5 /* CoreDataManagerTests.swift in Sources */,
 				54F6CE9A2E10584C000988C0 /* MockItunesService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,17 +51,16 @@ extension AppCellViewModel {
 }
 
 extension AppResult {
-    static func mock(userRatingCount: Int = 10) -> AppResult {
+    static func mock(trackId: Int = 1, userRatingCount: Int = 10) -> AppResult {
         AppResult(
-            trackId: 1,
+            trackId: trackId,
             trackName: "trackName",
             artistName: "artistName",
-            description: "description",
             artworkUrl100: "artworkUrl100",
             averageUserRating: 5.0,
             userRatingCount: userRatingCount,
             primaryGenreName: "primaryGenreName",
             formattedPrice: "1.0",
-            trackViewUrl: "trackViewUrl")
+            description: "description")
     }
 }
