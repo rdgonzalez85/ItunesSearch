@@ -127,36 +127,10 @@ class AppTableViewCell: UITableViewCell {
         categoryLabel.text = viewModel.category
         priceLabel.text = viewModel.price
         ratingLabel.text = viewModel.ratingText
-        setupStarRating(rating: viewModel.rating)
+        ratingStackView.setupStarRating(rating: viewModel.rating)
         loadImageAsync(from: viewModel.iconURL)
         
         appNameLabel.accessibilityIdentifier = accessibilityIdentifier + ".appName"
-    }
-    
-    private func setupStarRating(rating: Double) {
-        // Clear existing star views
-        ratingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        for i in 1...5 {
-            let starImageView = UIImageView()
-            starImageView.contentMode = .scaleAspectFit
-            starImageView.translatesAutoresizingMaskIntoConstraints = false
-            starImageView.widthAnchor.constraint(equalToConstant: self.layout.rating.width).isActive = true
-            starImageView.heightAnchor.constraint(equalToConstant: self.layout.rating.height).isActive = true
-            
-            if rating >= Double(i) {
-                starImageView.image = self.style.rating.full
-                starImageView.tintColor = self.style.rating.fillColor
-            } else if rating > Double(i - 1) {
-                starImageView.image = self.style.rating.halfFull
-                starImageView.tintColor = self.style.rating.fillColor
-            } else {
-                starImageView.image = self.style.rating.star
-                starImageView.tintColor = self.style.rating.emptyColor
-            }
-            
-            ratingStackView.addArrangedSubview(starImageView)
-        }
     }
     
     private func loadImageAsync(from urlString: String) {
@@ -186,14 +160,6 @@ class AppTableViewCell: UITableViewCell {
     }
     
     struct Style {
-        struct Rating {
-            let full = UIImage(systemName: "star.fill")
-            let halfFull = UIImage(systemName: "star.leadinghalf.filled")
-            let star = UIImage(systemName: "star")
-            let fillColor = UIColor.systemYellow
-            let emptyColor = UIColor.systemGray3
-        }
-        let rating = Rating()
         let appIconBackgroundColor = UIColor.systemGray6
         let appIconContentMode = UIView.ContentMode.scaleAspectFill
         let appNameFont = UIFont.boldSystemFont(ofSize: 16)
@@ -209,7 +175,6 @@ class AppTableViewCell: UITableViewCell {
         let priceTextAlignment = NSTextAlignment.right
     }
     struct Layout {
-        let rating = CGSize(width: 12, height: 12)
         let appIcon = CGSize(width: 60, height: 60)
         let appIconLeadingSpacing = 16.0
         let appIconCornerRadius = 12.0
@@ -227,5 +192,43 @@ class AppTableViewCell: UITableViewCell {
         let ratingBottomSpacing = -12.0
         let priceTrailingSpacing = -16.0
         let priceMinimumWidth = 50.0
+    }
+}
+
+extension UIStackView {
+    struct Style {
+        let full = UIImage(systemName: "star.fill")
+        let halfFull = UIImage(systemName: "star.leadinghalf.filled")
+        let star = UIImage(systemName: "star")
+        let fillColor = UIColor.systemYellow
+        let emptyColor = UIColor.systemGray3
+    }
+    
+    func setupStarRating(
+        rating: Double,
+        style: Style = Style(),
+        imageSize: CGSize = CGSize(width: 12, height: 12)) {
+        self.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        for i in 1...5 {
+            let starImageView = UIImageView()
+            starImageView.contentMode = .scaleAspectFit
+            starImageView.translatesAutoresizingMaskIntoConstraints = false
+            starImageView.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
+            starImageView.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
+            
+            if rating >= Double(i) {
+                starImageView.image = style.full
+                starImageView.tintColor = style.fillColor
+            } else if rating > Double(i - 1) {
+                starImageView.image = style.halfFull
+                starImageView.tintColor = style.fillColor
+            } else {
+                starImageView.image = style.star
+                starImageView.tintColor = style.emptyColor
+            }
+            
+            self.addArrangedSubview(starImageView)
+        }
     }
 }

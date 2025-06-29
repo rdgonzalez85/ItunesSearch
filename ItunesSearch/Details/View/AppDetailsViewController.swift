@@ -237,35 +237,9 @@ class AppDetailsViewController: UIViewController {
         ratingLabel.text = viewModel.ratingText
         descriptionTextView.text = viewModel.description
 
-        setupStarRating()
+        ratingStackView.setupStarRating(rating: viewModel.rating, imageSize: CGSize(width: self.layout.starImageSize, height: self.layout.starImageSize))
         setupInformationSection()
         loadAppIcon()
-    }
-
-    private func setupStarRating() {
-        ratingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        let rating = viewModel.rating
-        for i in 1...5 {
-            let starImageView = UIImageView()
-            starImageView.contentMode = .scaleAspectFit
-            starImageView.translatesAutoresizingMaskIntoConstraints = false
-            starImageView.widthAnchor.constraint(equalToConstant: self.layout.starImageSize).isActive = true
-            starImageView.heightAnchor.constraint(equalToConstant: self.layout.starImageSize).isActive = true
-
-            if rating >= Double(i) {
-                starImageView.image = UIImage(systemName: "star.fill")
-                starImageView.tintColor = self.style.systemYellowColor
-            } else if rating > Double(i - 1) {
-                starImageView.image = UIImage(systemName: "star.leadinghalf.filled")
-                starImageView.tintColor = self.style.systemYellowColor
-            } else {
-                starImageView.image = UIImage(systemName: "star")
-                starImageView.tintColor = self.style.systemGray3Color
-            }
-
-            ratingStackView.addArrangedSubview(starImageView)
-        }
     }
 
     private func setupInformationSection() {
@@ -424,9 +398,7 @@ class AppDetailsViewController: UIViewController {
         let labelColor: UIColor = .label
         let systemBlueColor: UIColor = .systemBlue
         let systemGrayColor: UIColor = .systemGray
-        let systemGray3Color: UIColor = .systemGray3
         let systemGray6Color: UIColor = .systemGray6
-        let systemYellowColor: UIColor = .systemYellow
         let whiteColor: UIColor = .white
 
         let appNameFont: UIFont = .boldSystemFont(ofSize: 22)
