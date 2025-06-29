@@ -87,7 +87,7 @@ class SearchViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.accessibilityIdentifier = "app.search.tableView"
         // Register cell
         tableView.register(AppTableViewCell.self, forCellReuseIdentifier: "AppTableViewCell")
     }
@@ -164,7 +164,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let cellViewModel = viewModel.appViewModel(at: indexPath.row)
-        cell.configure(with: cellViewModel)
+        let accessibilityIdentifier = "app.search.result_\(indexPath.row)"
+        cell.configure(with: cellViewModel, accessibilityIdentifier: accessibilityIdentifier)
+        cell.accessibilityIdentifier = accessibilityIdentifier
         cell.accessibilityTraits = .button
         return cell
     }

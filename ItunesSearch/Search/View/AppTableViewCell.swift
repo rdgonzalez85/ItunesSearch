@@ -119,7 +119,7 @@ class AppTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with viewModel: AppCellViewModelProtocol) {
+    func configure(with viewModel: AppCellViewModelProtocol, accessibilityIdentifier: String) {
         self.viewModel = viewModel
         
         appNameLabel.text = viewModel.appName
@@ -129,6 +129,8 @@ class AppTableViewCell: UITableViewCell {
         ratingLabel.text = viewModel.ratingText
         setupStarRating(rating: viewModel.rating)
         loadImageAsync(from: viewModel.iconURL)
+        
+        appNameLabel.accessibilityIdentifier = accessibilityIdentifier + ".appName"
     }
     
     private func setupStarRating(rating: Double) {

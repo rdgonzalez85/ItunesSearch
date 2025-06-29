@@ -384,6 +384,8 @@ class AppDetailsViewController: UIViewController {
             descriptionTextView,
             informationLabel
         ]
+        
+        self.appNameLabel.accessibilityIdentifier = "app.details.appName"
     }
     
     struct Layout {
