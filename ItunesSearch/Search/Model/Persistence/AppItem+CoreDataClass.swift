@@ -16,6 +16,9 @@ public class AppItem: NSManagedObject {
         self.primaryGenreName = appResult.primaryGenreName
         self.formattedPrice = appResult.formattedPrice
         self.trackDescription = appResult.description
+        self.screenshotUrls = appResult.screenshotUrls
+        self.trackContentRating = appResult.trackContentRating
+        self.minimumOsVersion = minimumOsVersion
         self.searchQuery = "" // Will be set by the caller
         self.dateAdded = Date()
     }
@@ -31,7 +34,10 @@ public class AppItem: NSManagedObject {
             userRatingCount: Int(userRatingCount),
             primaryGenreName: primaryGenreName ?? "",
             formattedPrice: formattedPrice,
-            description: trackDescription ?? ""
+            description: trackDescription ?? "",
+            screenshotUrls: screenshotUrls,
+            trackContentRating: trackContentRating ?? "",
+            minimumOsVersion: minimumOsVersion ?? ""
         )
     }
 }

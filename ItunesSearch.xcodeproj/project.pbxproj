@@ -14,6 +14,12 @@
 		54F11AC72E11795A00B7B8D5 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */; };
 		54F11AC92E1179E100B7B8D5 /* MockNetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */; };
 		54F11ACB2E117BA600B7B8D5 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */; };
+		54F11AD42E1196D800B7B8D5 /* AppDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AD32E1196D800B7B8D5 /* AppDetailsViewModel.swift */; };
+		54F11AD72E1196FF00B7B8D5 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AD62E1196FF00B7B8D5 /* NavigationCoordinator.swift */; };
+		54F11AD92E119D9200B7B8D5 /* AppDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11AD82E119D9200B7B8D5 /* AppDetailsViewController.swift */; };
+		54F11ADB2E11AC2200B7B8D5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ADA2E11AC2200B7B8D5 /* ImageLoader.swift */; };
+		54F11ADD2E11B75000B7B8D5 /* UserRatingFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ADC2E11B75000B7B8D5 /* UserRatingFormatterTests.swift */; };
+		54F11ADF2E11B87000B7B8D5 /* MockUserRatingFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F11ADE2E11B86F00B7B8D5 /* MockUserRatingFormatter.swift */; };
 		54F6CE4C2E10241D000988C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6CE4B2E10241D000988C0 /* AppDelegate.swift */; };
 		54F6CE4E2E10241D000988C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */; };
 		54F6CE532E10241D000988C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54F6CE512E10241D000988C0 /* Main.storyboard */; };
@@ -60,6 +66,12 @@
 		54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkReachability.swift; sourceTree = "<group>"; };
 		54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		54F11AD32E1196D800B7B8D5 /* AppDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsViewModel.swift; sourceTree = "<group>"; };
+		54F11AD62E1196FF00B7B8D5 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
+		54F11AD82E119D9200B7B8D5 /* AppDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsViewController.swift; sourceTree = "<group>"; };
+		54F11ADA2E11AC2200B7B8D5 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		54F11ADC2E11B75000B7B8D5 /* UserRatingFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRatingFormatterTests.swift; sourceTree = "<group>"; };
+		54F11ADE2E11B86F00B7B8D5 /* MockUserRatingFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRatingFormatter.swift; sourceTree = "<group>"; };
 		54F6CE482E10241D000988C0 /* ItunesSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItunesSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F6CE4B2E10241D000988C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +131,39 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		54F11ACE2E11966200B7B8D5 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				54F11AD22E1196C400B7B8D5 /* ViewModel */,
+				54F11AD12E11967A00B7B8D5 /* View */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		54F11AD12E11967A00B7B8D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				54F11AD82E119D9200B7B8D5 /* AppDetailsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		54F11AD22E1196C400B7B8D5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				54F11AD32E1196D800B7B8D5 /* AppDetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		54F11AD52E1196F800B7B8D5 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				54F11AD62E1196FF00B7B8D5 /* NavigationCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		54F6CE3F2E10241D000988C0 = {
 			isa = PBXGroup;
 			children = (
@@ -142,9 +187,11 @@
 		54F6CE4A2E10241D000988C0 /* ItunesSearch */ = {
 			isa = PBXGroup;
 			children = (
+				54F11ACE2E11966200B7B8D5 /* Details */,
 				54F6CE7E2E1030D4000988C0 /* Search */,
 				54F11AC02E10ADA500B7B8D5 /* CoreDataManager.swift */,
 				54F11AC22E10ADB700B7B8D5 /* NetworkReachability.swift */,
+				54F11ADA2E11AC2200B7B8D5 /* ImageLoader.swift */,
 				54F6CE4B2E10241D000988C0 /* AppDelegate.swift */,
 				54F6CE4D2E10241D000988C0 /* SceneDelegate.swift */,
 				54F6CE512E10241D000988C0 /* Main.storyboard */,
@@ -164,6 +211,7 @@
 				54F6CE9B2E105888000988C0 /* SearchViewModelTests.swift */,
 				54F6CE9D2E105EB3000988C0 /* AppCellViewModelTests.swift */,
 				54F11ACA2E117BA600B7B8D5 /* CoreDataManagerTests.swift */,
+				54F11ADC2E11B75000B7B8D5 /* UserRatingFormatterTests.swift */,
 			);
 			path = ItunesSearchTests;
 			sourceTree = "<group>";
@@ -180,6 +228,7 @@
 		54F6CE7E2E1030D4000988C0 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				54F11AD52E1196F800B7B8D5 /* Navigation */,
 				54F6CE952E104FAC000988C0 /* ViewModel */,
 				54F6CE942E104FA4000988C0 /* Model */,
 				54F6CE932E104F99000988C0 /* View */,
@@ -222,6 +271,7 @@
 				54F6CE992E10584C000988C0 /* MockItunesService.swift */,
 				54F11AC62E11795A00B7B8D5 /* MockCoreDataManager.swift */,
 				54F11AC82E1179E100B7B8D5 /* MockNetworkReachability.swift */,
+				54F11ADE2E11B86F00B7B8D5 /* MockUserRatingFormatter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -357,6 +407,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54F11AD92E119D9200B7B8D5 /* AppDetailsViewController.swift in Sources */,
+				54F11AD42E1196D800B7B8D5 /* AppDetailsViewModel.swift in Sources */,
 				54F6CE902E1040CE000988C0 /* iTunesService.swift in Sources */,
 				54F6CE4C2E10241D000988C0 /* AppDelegate.swift in Sources */,
 				54F6CE872E103FBC000988C0 /* SearchViewController.swift in Sources */,
@@ -366,6 +418,8 @@
 				54F11AC12E10ADA500B7B8D5 /* CoreDataManager.swift in Sources */,
 				54F11AC32E10ADB700B7B8D5 /* NetworkReachability.swift in Sources */,
 				54F6CE4E2E10241D000988C0 /* SceneDelegate.swift in Sources */,
+				54F11ADB2E11AC2200B7B8D5 /* ImageLoader.swift in Sources */,
+				54F11AD72E1196FF00B7B8D5 /* NavigationCoordinator.swift in Sources */,
 				54F6CE562E10241D000988C0 /* ItunesSearch.xcdatamodeld in Sources */,
 				54F6CE922E104111000988C0 /* AppResult.swift in Sources */,
 				54F11ABE2E10AD4500B7B8D5 /* AppItem+CoreDataClass.swift in Sources */,
@@ -377,12 +431,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54F11ADF2E11B87000B7B8D5 /* MockUserRatingFormatter.swift in Sources */,
 				54F6CE662E102420000988C0 /* iTunesServiceTests.swift in Sources */,
 				54F6CE9E2E105EB3000988C0 /* AppCellViewModelTests.swift in Sources */,
 				54F11AC92E1179E100B7B8D5 /* MockNetworkReachability.swift in Sources */,
 				54F6CE982E105333000988C0 /* MockURLSession.swift in Sources */,
 				54F6CE9C2E105888000988C0 /* SearchViewModelTests.swift in Sources */,
 				54F11AC72E11795A00B7B8D5 /* MockCoreDataManager.swift in Sources */,
+				54F11ADD2E11B75000B7B8D5 /* UserRatingFormatterTests.swift in Sources */,
 				54F11ACB2E117BA600B7B8D5 /* CoreDataManagerTests.swift in Sources */,
 				54F6CE9A2E10584C000988C0 /* MockItunesService.swift in Sources */,
 			);

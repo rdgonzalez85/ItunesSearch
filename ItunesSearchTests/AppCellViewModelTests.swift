@@ -13,28 +13,10 @@ final class AppCellViewModelTests: XCTestCase {
     func testGivenAppResult_WhenAppCellViewModelIsCreated_ThenRatingTextReturnsTheCorrectValue() {
         
         let appResult = AppResult.mock()
-        let viewModel = AppCellViewModel(app: appResult)
+        let userRatingFormatter = MockUserRatingFormatter()
+        let viewModel = AppCellViewModel(app: appResult, reviewFormatter: userRatingFormatter)
         
-        XCTAssertEqual(viewModel.ratingText, String(format: "%.1f ⭐ \(viewModel.formattedRatingCount)", viewModel.rating))
-    }
-
-    func testGivenAppResultWithUserRatingCount_WhenAppCellViewModelIsCreated_ThenFormattedRatingCountReturnsTheCorrectValue() {
-        var appResult = AppResult.mock(userRatingCount: 1213310) // 1,213,310
-        var viewModel = AppCellViewModel(app: appResult)
-        
-        XCTAssertEqual(viewModel.formattedRatingCount, "1.2M ratings")
-        
-        appResult = AppResult.mock(userRatingCount: 213310) // 213,310
-        viewModel = AppCellViewModel(app: appResult)
-        XCTAssertEqual(viewModel.formattedRatingCount, "213.3K ratings")
-        
-        appResult = AppResult.mock(userRatingCount: 310)
-        viewModel = AppCellViewModel(app: appResult)
-        XCTAssertEqual(viewModel.formattedRatingCount, "310 ratings")
-        
-        appResult = AppResult.mock(userRatingCount: 0)
-        viewModel = AppCellViewModel(app: appResult)
-        XCTAssertEqual(viewModel.formattedRatingCount, "No ratings")
+        XCTAssertEqual(viewModel.ratingText, String(format: "%.1f ⭐ \(viewModel.ratingCount)", viewModel.rating))
     }
 }
 
@@ -61,6 +43,10 @@ extension AppResult {
             userRatingCount: userRatingCount,
             primaryGenreName: "primaryGenreName",
             formattedPrice: "1.0",
-            description: "description")
+            description: "description",
+            screenshotUrls: [],
+            trackContentRating: "",
+            minimumOsVersion: ""
+        )
     }
 }

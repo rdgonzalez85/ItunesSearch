@@ -10,8 +10,9 @@ class AppTableViewCell: UITableViewCell {
     private let ratingLabel = UILabel()
     private let priceLabel = UILabel()
     
-    private var viewModel: AppCellViewModel?
+    private var viewModel: AppCellViewModelProtocol?
     private var imageLoadTask: Task<Void, Never>?
+    private let imageLoader = ImageLoader()
     private let style: Style = Style()
     private let layout: Layout = Layout()
     
@@ -118,7 +119,7 @@ class AppTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with viewModel: AppCellViewModel) {
+    func configure(with viewModel: AppCellViewModelProtocol) {
         self.viewModel = viewModel
         
         appNameLabel.text = viewModel.appName
@@ -160,15 +161,10 @@ class AppTableViewCell: UITableViewCell {
         imageLoadTask?.cancel()
         
         imageLoadTask = Task {
-            guard let url = URL(string: urlString) else { return }
             
             do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                
-                // Check if task was cancelled
-                guard !Task.isCancelled else { return }
-                
-                guard let image = UIImage(data: data) else { return }
+                guard let image = try await self.imageLoader.loadImage(urlString: urlString),
+                      !Task.isCancelled else { return }
                 
                 await MainActor.run {
                     // Ensure the cell hasn't been reused

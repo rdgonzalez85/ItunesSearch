@@ -15,4 +15,7 @@ struct AppResult: Codable, Equatable {
     let primaryGenreName: String
     let formattedPrice: String?
     let description: String
+    let screenshotUrls: [String]
+    let trackContentRating: String
+    let minimumOsVersion: String
 }

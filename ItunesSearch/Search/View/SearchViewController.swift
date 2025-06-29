@@ -7,29 +7,36 @@ class SearchViewController: UIViewController {
     private let tableView = UITableView()
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
-    private var viewModel: SearchViewModel!
+    private var viewModel: SearchViewModel = {
+        let networkReachability = NetworkReachability()
+        
+        let coreDataManager: CoreDataManager?
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            coreDataManager = CoreDataManager(persistentContainer: appDelegate.persistentContainer)
+        } else {
+            coreDataManager = nil
+        }
+        
+        return SearchViewModel(
+            iTunesService: iTunesService(),
+            coreDataManager: coreDataManager,
+            networkReachability: networkReachability
+        )
+    }()
     
+    private var navigationCoordinator = {
+        NavigationCoordinator()
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewModel()
         setupUI()
         setupConstraints()
         setupTableView()
         setupBindings()
         performInitialSearch()
     }
-    
-    private func setupViewModel() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let coreDataManager = CoreDataManager(persistentContainer: appDelegate.persistentContainer)
-        let networkReachability = NetworkReachability()
-                
-        viewModel = SearchViewModel(
-            iTunesService: iTunesService(),
-            coreDataManager: coreDataManager,
-            networkReachability: networkReachability
-        )
-    }
+
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
@@ -162,7 +169,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AppTableViewCell", for: indexPath) as! AppTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AppTableViewCell", for: indexPath) as? AppTableViewCell else {
+            return UITableViewCell()
+        }
         let cellViewModel = viewModel.appViewModel(at: indexPath.row)
         cell.configure(with: cellViewModel)
         return cell
@@ -171,8 +180,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        _ = viewModel.appViewModel(at: indexPath.row)
-        
-        // TODO: - show details of selected item
+        let appViewModel = viewModel.appViewModel(at: indexPath.row)
+        self.navigationCoordinator.showAppDetails(for: appViewModel.appResult, from: self)
     }
 }

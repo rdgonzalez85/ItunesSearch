@@ -7,7 +7,7 @@ class SearchViewModel: ObservableObject {
     @Published var errorMessage: String?
     private let numberOfCacheDays = 7
     private let iTunesService: iTunesServiceProtocol
-    private let coreDataManager: CoreDataManagerProtocol
+    private let coreDataManager: CoreDataManagerProtocol?
     private let networkReachability: NetworkReachabilityProtocol
     
     var numberOfApps: Int {
@@ -15,7 +15,7 @@ class SearchViewModel: ObservableObject {
     }
     
     init(iTunesService: iTunesServiceProtocol,
-         coreDataManager: CoreDataManagerProtocol,
+         coreDataManager: CoreDataManagerProtocol? = nil,
          networkReachability: NetworkReachabilityProtocol) {
         self.iTunesService = iTunesService
         self.coreDataManager = coreDataManager
@@ -70,7 +70,10 @@ class SearchViewModel: ObservableObject {
     
     private func loadFromCache(query: String) async {
         do {
-            let cachedResults = try coreDataManager.fetchApps(for: query)
+            guard let cachedResults = try coreDataManager?.fetchApps(for: query) else {
+                self.apps = []
+                return
+            }
             
             if cachedResults.isEmpty {
                 self.errorMessage = "No cached results found. Please check your internet connection."
@@ -87,7 +90,7 @@ class SearchViewModel: ObservableObject {
     
     private func saveToCache(_ appResults: [AppResult], query: String) async {
         do {
-            try coreDataManager.saveApps(appResults, for: query)
+            try coreDataManager?.saveApps(appResults, for: query)
         } catch {
             print("Failed to save apps to cache: \(error.localizedDescription)")
         }
@@ -96,7 +99,7 @@ class SearchViewModel: ObservableObject {
     private func cleanUpOldData() async {
         do {
             // Only keep results for the last $numberOfCacheDays days
-            try coreDataManager.deleteOldApps(olderThan: self.numberOfCacheDays)
+            try coreDataManager?.deleteOldApps(olderThan: self.numberOfCacheDays)
         } catch {
             print("Failed to clean up old data: \(error.localizedDescription)")
         }
