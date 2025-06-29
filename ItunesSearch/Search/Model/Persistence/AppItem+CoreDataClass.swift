@@ -27,17 +27,17 @@ public class AppItem: NSManagedObject {
     func toAppResult() -> AppResult {
         return AppResult(
             trackId: Int(trackId),
-            trackName: trackName ?? "",
-            artistName: artistName ?? "",
-            artworkUrl100: artworkUrl100 ?? "",
+            trackName: trackName,
+            artistName: artistName,
+            artworkUrl100: artworkUrl100,
             averageUserRating: averageUserRating,
             userRatingCount: Int(userRatingCount),
-            primaryGenreName: primaryGenreName ?? "",
+            primaryGenreName: primaryGenreName,
             formattedPrice: formattedPrice,
-            description: trackDescription ?? "",
-            screenshotUrls: screenshotUrls ?? [],
-            trackContentRating: trackContentRating ?? "",
-            minimumOsVersion: minimumOsVersion ?? ""
+            description: trackDescription,
+            screenshotUrls: screenshotUrls,
+            trackContentRating: trackContentRating,
+            minimumOsVersion: minimumOsVersion
         )
     }
 }
