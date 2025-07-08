@@ -56,6 +56,8 @@ Users can enter a search term, browse results, and view details for each item.
 ## TODO / Possible Improvements
 - Implement pagination for large result sets.
 - Improve error handling and display user-friendly messages.
+- Assert with UINavigationController related to the use of storyboards
+- List status is not preserved when loading data from core data
 
 ## License
 This project is open source under the MIT License.
