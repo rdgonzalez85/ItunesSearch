@@ -143,6 +143,12 @@ class CoreDataManagerTests: XCTestCase {
         oldAppItem.trackId = 999
         oldAppItem.trackName = "Old App"
         oldAppItem.artistName = "O"
+        oldAppItem.artworkUrl100 = "OldartworkUrl100"
+        oldAppItem.minimumOsVersion = "1.0"
+        oldAppItem.primaryGenreName = "primaryGenreName"
+        oldAppItem.screenshotUrls = ["screenshotUrls"]
+        oldAppItem.trackContentRating = "trackContentRating"
+        oldAppItem.trackDescription = "trackDescription"
         oldAppItem.searchQuery = "old_query"
         oldAppItem.dateAdded = oldAppDate
 
